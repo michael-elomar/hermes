@@ -34,6 +34,7 @@ namespace hermes
         public:
             // init a socket with either TCP or UDP comm type
             // defaults to local communication protocol
+            Socket() {}
             Socket(uint8_t comm_type, uint8_t socket_type);
 
             // initializes a socket with a protocol
@@ -44,9 +45,18 @@ namespace hermes
 
             bool Bind(IPAddress ip_address);
             bool Listen();
+            bool BindAndListen(IPAddress ip_address);
             Socket Accept();
+            bool Connect(IPAddress ip_address);
             bool Close();
+            bool Shutdown();
+            void Send(std::string msg);
+            std::string Receive(uint16_t buff_size);
 
+
+
+        public:
+            void SetSocketFD(int socket_fd);
 
         private:
             int socket_fd;

@@ -46,9 +46,13 @@ namespace hermes
     {
         return this->port;
     }
-    struct sockaddr_in IPAddress::GetSockAddr()
+    struct sockaddr* IPAddress::GetSockAddr()
     {
-        return this->sock_addr;
+        return (struct sockaddr *) &(this->sock_addr);
+    }
+    socklen_t IPAddress::GetSockAddrLen()
+    {
+        return sizeof(this->sock_addr);
     }
 
 }

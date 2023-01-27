@@ -24,10 +24,12 @@ namespace hermes
 
             std::string GetIPAddress();
             uint32_t GetPort();
-            struct sockaddr_in GetSockAddr();
+            struct sockaddr* GetSockAddr();
+            socklen_t GetSockAddrLen();
 
         private:
             struct sockaddr_in sock_addr;
+            socklen_t *addr_len_pointer, addr_len;
             uint32_t port;
             std::string address_str;
     };
