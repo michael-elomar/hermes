@@ -36,8 +36,11 @@ namespace hermes
             // defaults to local communication protocol
             Socket(uint8_t comm_type, uint8_t socket_type);
 
-            // init an socket and bind it to an IP address
+            // initializes a socket with a protocol
             Socket(uint8_t comm_type, uint8_t socket_type, IPAddress ip_address);
+
+            // init an socket and bind it to an IP address
+            Socket(uint8_t comm_type, IPAddress ip_address);
 
             bool Bind(IPAddress ip_address);
             bool Listen();
