@@ -1,56 +1,35 @@
-#ifndef SOCKET_HPP
-#define SOCKET_HPP
+#ifndef IPADDRESS_HPP
+#define IPADDRESS_HPP
 
-#include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include "ipaddress.hpp"
+#include <assert.h>
+#include <netinet/in.h>
+#include <iostream>
 
+#define DEFAULT_PORT 56789
 
 namespace hermes
 {
-    enum IProtocol
-    {
-        LOCAL,
-        IPV4,
-        IPV6
-    };
-    enum CommType
-    {
-        TCP,
-        UDP
-    };
-    enum SocketType
-    {
-        SERVER,
-        CLIENT
-    };
-
-    class Socket
+    class IPAddress
     {
         public:
-            // init a socket with either TCP or UDP comm type
-            // defaults to local communication protocol
-            Socket(uint8_t comm_type, uint8_t socket_type);
+            IPAddress();
 
-            // init an socket and bind it to an IP address
-            Socket(uint8_t comm_type, uint8_t socket_type, IPAddress ip_address);
+            IPAddress(std::string address);
+            IPAddress(std::string address, uint32_t port);
 
-            bool Bind(IPAddress ip_address);
-            bool Listen();
-            Socket Accept();
-            bool Close();
+            static in_addr_t inet_addr(std::string address);
 
+            std::string GetIPAddress();
+            uint32_t GetPort();
+            struct sockaddr_in GetSockAddr();
 
         private:
-            int socket_fd;
-            IPAddress ip_address;
-            uint8_t comm_type, socket_type;
-            uint16_t backlog = 10;
+            struct sockaddr_in sock_addr;
+            uint32_t port;
+            std::string address_str;
     };
 }
-
-#endif // SOCKET_HPP
+#endif // IPADDRESS_HPP
