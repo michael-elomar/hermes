@@ -1,19 +1,25 @@
-cmake_minimum_required(VERSION 3.10)
+# Created by and for Qt Creator This file was created for editing the project sources only.
+# You may attempt to use it for building too, by modifying this file here.
 
+cmake_minimum_required(VERSION 3.5)
+project(Hermes)
 
-project(Hermes VERSION 1.0)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin/")
-
-
-set(CMAKE_CXX_STANDARD 14)
-set(INDLUDE_DIR "../include")
-
-set(
-    SOURCES "./src/main.cpp" 
-    ${INDLUDE_DIR}/Node.hpp 
-    ${INDLUDE_DIR}/Node.cpp
+include_directories(
+    include
 )
 
-add_executable(hermes ${SOURCES})
-target_include_directories(hermes PRIVATE ${INDLUDE_DIR})
+set (SRCS
+    include/hermes.h
+    include/socket.hpp
+    include/socket.cpp
+    include/ipaddress.hpp
+    include/ipaddress.cpp
+    src/main.cpp
+)
+
+
+add_executable(${CMAKE_PROJECT_NAME} ${SRCS})
+

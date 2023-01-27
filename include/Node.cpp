@@ -1,12 +1,6 @@
+#include <stdio.h>
 #include "Node.hpp"
 
-namespace message 
+namespace hermes
 {
-    class Node 
-    {
-        public:
-            Node(int id) 
-            {
-            }
-    };
 }
