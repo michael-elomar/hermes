@@ -5,5 +5,7 @@
 #include "Relay.hpp"
 #include "ipaddress.hpp"
 #include "socket.hpp"
+#include "tcpclient.hpp"
+#include "tcpserver.hpp"
 
 #endif // HERMES_H

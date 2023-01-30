@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include "ipaddress.hpp"
+#include <sys/ioctl.h>
 
 
 namespace hermes
@@ -32,37 +33,22 @@ namespace hermes
     class Socket
     {
         public:
-            // init a socket with either TCP or UDP comm type
-            // defaults to local communication protocol
-            Socket() {}
-            Socket(uint8_t comm_type, uint8_t socket_type);
-
-            // initializes a socket with a protocol
-            Socket(uint8_t comm_type, uint8_t socket_type, IPAddress ip_address);
-
-            // init an socket and bind it to an IP address
-            Socket(uint8_t comm_type, IPAddress ip_address);
-
-            bool Bind(IPAddress ip_address);
-            bool Listen();
-            bool BindAndListen(IPAddress ip_address);
-            Socket Accept();
-            bool Connect(IPAddress ip_address);
+            Socket();
             bool Close();
             bool Shutdown();
             void Send(std::string msg);
-            std::string Receive(uint16_t buff_size);
-
-
-
-        public:
+            std::string Receive(uint32_t buff_size);
+            
             void SetSocketFD(int socket_fd);
+            int GetSocketFD();
+            uint32_t DataAvailable();
+
+
 
         private:
             int socket_fd;
             IPAddress ip_address;
             uint8_t comm_type, socket_type;
-            uint16_t backlog = 10;
     };
 }
 

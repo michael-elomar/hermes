@@ -13,9 +13,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         print(f"Connected by {addr}")
 
+        conn.sendall(b"Hello from python server")
 
         data = conn.recv(1024)
 
         print(data.decode("ascii"))
 
-        conn.sendall(b"Hello back")

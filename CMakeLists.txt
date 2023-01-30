@@ -12,15 +12,21 @@ include_directories(
     include
 )
 
-set (SRCS
+set (INCLUDE
     include/hermes.h
     include/socket.hpp
     include/socket.cpp
     include/ipaddress.hpp
     include/ipaddress.cpp
-    src/main.cpp
+    include/tcpserver.hpp
+    include/tcpserver.cpp
+    include/tcpclient.hpp
+    include/tcpclient.cpp
 )
 
 
-add_executable(${CMAKE_PROJECT_NAME} ${SRCS})
+
+
+add_executable(server src/main.cpp ${INCLUDE})
+
 

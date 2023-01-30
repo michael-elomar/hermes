@@ -40,7 +40,9 @@ namespace hermes
     }
     std::string IPAddress::GetIPAddress()
     {
-        return this->address_str;
+        std::stringstream ss;
+        ss << this->address_str << ":" << std::to_string(this->port);
+        return ss.str();
     }
     uint32_t IPAddress::GetPort()
     {
