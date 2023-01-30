@@ -48,7 +48,7 @@ namespace hermes
     {
         this->socket_fd = socket_fd;
     }
-    uin32_T Socket::DataAvailable()
+    uint32_t Socket::DataAvailable()
     {
         int count;
         ioctl(this->socket_fd, FIONREAD, &count);

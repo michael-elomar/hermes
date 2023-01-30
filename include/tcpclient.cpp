@@ -58,7 +58,7 @@ namespace hermes
     {
         return this->connected_socket.Close();
     }
-    uin32_t TcpClient::DataAvailable()
+    uint32_t TcpClient::DataAvailable()
     {
         int count;
         ioctl(this->client_fd, FIONREAD, &count);
