@@ -13,23 +13,6 @@
 
 namespace hermes
 {
-    enum IProtocol
-    {
-        LOCAL,
-        IPV4,
-        IPV6
-    };
-    enum CommType
-    {
-        TCP,
-        UDP
-    };
-    enum SocketType
-    {
-        SERVER,
-        CLIENT
-    };
-
     class Socket
     {
         public:
@@ -38,16 +21,12 @@ namespace hermes
             bool Shutdown();
             void Send(std::string msg);
             std::string Receive(uint32_t buff_size);
-            
             void SetSocketFD(int socket_fd);
             int GetSocketFD();
             uint32_t DataAvailable();
 
-
-
         private:
             int socket_fd;
-            IPAddress ip_address;
             uint8_t comm_type, socket_type;
     };
 }

@@ -79,23 +79,23 @@ namespace hermes
 
         return bind_flag && listen_flag;
     }
-    bool TcpServer::Accept()
+    TcpClient TcpServer::Accept()
     {
-        this->connected_socket = Socket();
+        Socket connected_socket = Socket();
         socklen_t addr_len = ip_address.GetSockAddrLen();
-        this->connected_socket.SetSocketFD(
+        connected_socket.SetSocketFD(
             accept(this->server_fd, this->ip_address.GetSockAddr(), &addr_len));
 
-        if (this->connected_socket.GetSocketFD() < 0)
+        if (connected_socket.GetSocketFD() < 0)
         {
             std::cerr << "Failed to initialize socket" << std::endl;
-            return false;
         }
-        return true;
+        TcpClient client = TcpClient(connected_socket);
+        return client;
     }
-    bool TcpServer::Close()
+    bool TcpServer::Close(TcpClient client)
     {
-        return this->connected_socket.Close();
+        return client.Close();
     }
 
     bool TcpServer::Shutdown()
@@ -104,16 +104,16 @@ namespace hermes
         return ret == 0;
     }
 
-    void TcpServer::Send(std::string msg)
+    void TcpServer::Send(TcpClient client, std::string msg)
     {
-        this->connected_socket.Send(msg);
+        client.Send(msg);
     }
-    std::string TcpServer::Receive(uint32_t buff_size)
+    std::string TcpServer::Receive(TcpClient client, uint32_t buff_size)
     {
-        return this->connected_socket.Receive(buff_size);
+        return client.Receive(buff_size);
     }
-    uint32_t TcpServer::DataAvailable()
+    uint32_t TcpServer::DataAvailable(TcpClient client)
     {
-        return this->connected_socket.DataAvailable();
+        return client.DataAvailable();
     }
 }

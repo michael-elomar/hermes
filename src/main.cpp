@@ -10,6 +10,8 @@ int main(int argc, char **argv)
     std::cout << ip_addr.GetIPAddress() << std::endl;
 
     TcpServer server = TcpServer(ip_addr);
-    server.Accept();
-    std::cout << server.DataAvailable() << std::endl;
+    TcpClient client = server.Accept();
+    std::cout << server.Receive(client, server.DataAvailable(client)) << std::endl;
+    server.Close(client);
+    server.Shutdown();
 }

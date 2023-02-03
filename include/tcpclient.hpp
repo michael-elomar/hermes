@@ -13,6 +13,7 @@ namespace hermes
         public:
             TcpClient();
             TcpClient(IPAddress ip_address);
+            TcpClient(Socket socket);
             bool Connect(IPAddress ip_address);
             bool Close();
             void Send(std::string msg);

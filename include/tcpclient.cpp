@@ -15,6 +15,15 @@ namespace hermes
             exit(EXIT_FAILURE);
         }
     }
+    TcpClient::TcpClient(Socket socket)
+    {
+        if (socket.GetSocketFD() < 0)
+        {
+            std::cerr << "Failed to initialize TcpClient" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        this->client_fd = socket.GetSocketFD();
+    }
 
     TcpClient::TcpClient(IPAddress ip_address)
     {
