@@ -7,6 +7,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     msg = b'Hello world'
     s.send(msg)
-    print(len(msg))
+    print(s.recv(20).decode('ascii'))
 
 

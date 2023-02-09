@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <regex>
 // local includes
 
 #include "../include/hermes.h"
@@ -11,7 +11,20 @@ int main(int argc, char **argv)
 
     TcpServer server = TcpServer(ip_addr);
     TcpClient client = server.Accept();
-    std::cout << server.Receive(client, server.DataAvailable(client)) << std::endl;
-    server.Close(client);
-    server.Shutdown();
+    std::regex re("^GET");
+    while(1)
+    {
+        while(client.DataAvailable() < 3);
+        std::string s = client.Receive(client.DataAvailable());
+        if (std::regex_search(s, re))
+        {
+            std::string swk; std::cmatch m;
+            std::regex_search(s.c_str(), m, std::regex("Sec-WebSocket-Key: (.*)"),
+                    std::regex_constants::match_default);
+            swk = m[1].str() + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+
+            std::cout <<  swk << std::endl; // SHA-1 and Base64 encoding of this
+
+        }
+    }
 }
