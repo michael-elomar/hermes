@@ -2,12 +2,14 @@
 #include <regex>
 // local includes
 
-#include "../include/hermes.h"
+#include <hermes.h>
 using namespace hermes;
 int main(int argc, char **argv)
 {
     IPAddress ip_addr = IPAddress("127.0.0.1");
     std::cout << ip_addr.GetIPAddress() << std::endl;
+
+    const unsigned char text[100] = "hello world";
 
     TcpServer server = TcpServer(ip_addr);
     TcpClient client = server.Accept();
