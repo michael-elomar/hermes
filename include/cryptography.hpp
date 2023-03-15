@@ -80,6 +80,7 @@ char* base64Encode(uint8_t *input, uint32_t length)
 			output[j+3] = '=';
 			break;
 	}
+	output[output_len] = '\0';
 	return output;
 }
 
