@@ -26,6 +26,8 @@ int main(int argc, char **argv)
             swk = m[1].str() + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
 
             std::cout <<  swk << std::endl; // SHA-1 and Base64 encoding of this
+            uint8_t md[SHA_DIGEST_LENGTH];
+            sha1((void *)swk.c_str(), swk.length(), md);
 
         }
     }
